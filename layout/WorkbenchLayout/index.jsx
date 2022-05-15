@@ -9,64 +9,38 @@ import {
 } from "@ant-design/icons";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 const { Content, Footer, Sider } = Layout;
 
-function getItem(label, key, icon, href, userTypes, children) {
+function getItem(label, key, icon, href, children) {
   return {
     key,
     icon,
     children,
     label,
-    userTypes,
     href,
   };
 }
 
 const items = [
-  getItem("Home page", "1", <HomeOutlined />, "/workbench/home", [
-    "factory manager",
+  getItem("用户主页", "1", <HomeOutlined />, "/workbench/home"),
+  getItem("订单管理", "2", <DesktopOutlined />, "/workbench/order"),
+  getItem("设备管理", "9", <FileOutlined />, "/workbench/equipment", [
+    getItem("设备信息管理", "3", null, "/workbench/equipment/information"),
+    getItem("设备类型管理", "4", null, "/workbench/equipment/type"),
   ]),
-  getItem("Order management", "2", <DesktopOutlined />, "/workbench/order", [
-    "factory manager",
-  ]),
-  getItem(
-    "Equipment management",
-    "9",
-    <FileOutlined />,
-    "/workbench/equipment",
-    ["factory manager"]
-  ),
-  // getItem(
-  //   "Tests",
-  //   "10",
-  //   <Image src="/order.svg" alt="vercel" width="15" height="15" />,
-  //   "/workbench/equipment"
-  // ),
 ];
-
-// const items = [
-//   getItem("Option 1", "1", <PieChartOutlined />),
-//   getItem("Option 2", "2", <DesktopOutlined />),
-//   getItem("User", "sub1", <UserOutlined />, [
-//     getItem("Tom", "3"),
-//     getItem("Bill", "4"),
-//     getItem("Alex", "5"),
-//   ]),
-//   getItem("Team", "sub2", <TeamOutlined />, [
-//     getItem("Team 1", "6"),
-//     getItem("Team 2", "8"),
-//   ]),
-//   getItem("Files", "9", <FileOutlined />),
-// ];
 
 export default function WorkbenchLayout({ children }) {
   const [selected, setSelected] = useState(["1"]);
   const router = useRouter();
   const handleChangeContainer = ({ key, item }) => {
     setSelected(key);
-    router.push(item.props.href);
+    const { href } = item.props;
+    router.push(href);
+    const newBreadcrumb = href.split("/").slice(2);
+    setBreadcrumb(newBreadcrumb);
   };
+  const [breadcrumb, setBreadcrumb] = useState(["home"]);
   return (
     <Layout
       style={{
@@ -93,8 +67,9 @@ export default function WorkbenchLayout({ children }) {
               margin: "16px 0",
             }}
           >
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            {breadcrumb.map((cur, idx) => (
+              <Breadcrumb.Item key={idx}>{cur}</Breadcrumb.Item>
+            ))}
           </Breadcrumb>
           <div
             className="site-layout-background"

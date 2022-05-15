@@ -1,9 +1,9 @@
 import WorkbenchLayout from "../../../layout/WorkbenchLayout";
 
-export default function Equipment() {
-  return <div>equipment</div>;
+export default function Type() {
+  return <div>type</div>;
 }
 
-Equipment.getLayout = function getLayout(page) {
+Type.getLayout = function getLayout(page) {
   return <WorkbenchLayout>{page}</WorkbenchLayout>;
 };

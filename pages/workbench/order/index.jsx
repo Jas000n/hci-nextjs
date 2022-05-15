@@ -5,8 +5,7 @@ import WorkbenchLayout from "../../../layout/WorkbenchLayout";
 export default function Order() {
   return (
     <div>
-      order
-      <Table dataSource={dataSource} columns={columns} />
+      <Table dataSource={initialOrders} columns={columns} />
       {/* <Button>+++</Button> */}
     </div>
   );
@@ -16,7 +15,7 @@ Order.getLayout = function getLayout(page) {
   return <WorkbenchLayout>{page}</WorkbenchLayout>;
 };
 
-const dataSource = [
+const initialOrders = [
   {
     key: "1",
     name: "胡彦斌",

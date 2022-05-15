@@ -37,7 +37,7 @@ export default function WorkbenchLayout({ children }) {
     setSelected(key);
     const { href } = item.props;
     router.push(href);
-    const newBreadcrumb = href.split("/").slice(2);
+    const newBreadcrumb = href.split("/").slice(2); //去掉''和'workbench'
     setBreadcrumb(newBreadcrumb);
   };
   const [breadcrumb, setBreadcrumb] = useState(["home"]);
@@ -63,12 +63,15 @@ export default function WorkbenchLayout({ children }) {
           }}
         >
           <Breadcrumb
+            separator=">"
             style={{
               margin: "16px 0",
             }}
           >
             {breadcrumb.map((cur, idx) => (
-              <Breadcrumb.Item key={idx}>{cur}</Breadcrumb.Item>
+              <Breadcrumb.Item key={idx}>
+                {cur.slice(0, 1).toUpperCase() + cur.slice(1)}
+              </Breadcrumb.Item>
             ))}
           </Breadcrumb>
           <div

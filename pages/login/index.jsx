@@ -15,33 +15,33 @@ import { useLocalStorageState } from "ahooks";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { message } from "antd";
-import { initialUsers } from "/initial/initialUser.js";
+import axios from "axios";
 export default function Login() {
-  const [users, setUsers] = useLocalStorageState("users", {
-    defaultValue: initialUsers,
-  });
+  const [users, setUsers] = useState({});
+  //useContext: useUser
   const [inputUserName, setInputUserName] = useState("");
   const [inputPassword, setInputPassword] = useState("");
-  const [currentUser, setCurrentUser] = useLocalStorageState("currentUser", {
-    defaultValue: initialUsers[0],
-  });
   const router = useRouter();
   const handleOnKeyDown = (e) => {
     if (e.key === "Enter") {
-      const match = users.find((cur) => {
-        if (cur.userName === inputUserName && cur.password === inputPassword) {
-          setCurrentUser(cur);
-          return true;
-        }
-        return false;
-      });
-      if (match) {
-        message.success("登录成功");
-        router.push("/workbench/home");
-      } else {
-        // console.log("error");
-        message.error("账号或密码错误,请重新输入");
-      }
+      axios
+        .post("/api/users", {
+          userName: inputUserName,
+          password: inputPassword,
+        })
+        .then((res) => {
+          const { matchedAccount } = res.data;
+          if (matchedAccount !== undefined) {
+            message.success("登录成功");
+            router.push("/workbench/home");
+          } else {
+            message.error("账号或密码错误,请重新输入");
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          message.error("服务器出现问题,请查看控制台");
+        });
     }
   };
   return (

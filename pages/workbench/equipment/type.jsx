@@ -1,9 +1,108 @@
 import WorkbenchLayout from "../../../layout/WorkbenchLayout";
+import { Table, Button } from "antd";
+import styled from "styled-components";
+import {
+  demoColumns,
+  demoData,
+  demoOnChange,
+} from "../../../database/demo/type";
+import { useLocalStorageState } from "ahooks";
+import { useState } from "react";
 
 export default function Type() {
-  return <div>type</div>;
+  const initialEquipmentTypesColumn = [
+    { title: "ID", dataIndex: "id" },
+    {
+      title: "设备类型",
+      dataIndex: "equipmentType",
+    },
+    {
+      title: "可生产产品类型",
+      dataIndex: "productType",
+    },
+    {
+      title: "操作",
+      dataIndex: "operation",
+      width: "15%",
+      render: (text, record, index) => {
+        console.log(text, record, index);
+        return (
+          <>
+            {/* <Button>修改</Button> */}
+            <Button
+              onClick={() => {
+                console.log("?");
+                setEquipmentTypesData((lines) =>
+                  lines.filter((cur, idx) => idx != index)
+                );
+                // setEquipmentTypesData
+              }}
+            >
+              删除
+            </Button>
+          </>
+        );
+      },
+    },
+  ];
+  const [equipmentTypesColumn, setEquipmentTypesColumn] = useState(
+    initialEquipmentTypesColumn
+  );
+  const [equipmentTypesData, setEquipmentTypesData] = useState(
+    initialEquipmentTypesData
+  );
+  console.log(equipmentTypesData, "data");
+
+  return (
+    <>
+      <Bar>
+        <Button>添加设备类型</Button>
+        <Button
+          onClick={() => {
+            setEquipmentTypesData(initialEquipmentTypesData);
+          }}
+        >
+          重置测试数据
+        </Button>
+      </Bar>
+      <Table
+        columns={equipmentTypesColumn}
+        dataSource={equipmentTypesData}
+        // onChange={demoOnChange}
+      />
+    </>
+  );
 }
 
 Type.getLayout = function getLayout(page) {
   return <WorkbenchLayout>{page}</WorkbenchLayout>;
 };
+
+/* style */
+
+const Bar = styled.div`
+  display: flex;
+  margin: 0 0 25px 0;
+  justify-content: space-between;
+`;
+
+const initialEquipmentTypesData = [
+  {
+    key: "1",
+    id: "1",
+    equipmentType: "clothes",
+    productType: "卫衣,衬衫", //TODO 变为标签样式
+  },
+  {
+    key: "2",
+    id: "2",
+    equipmentType: "shoes",
+    productType: "篮球鞋,跑鞋", //TODO 变为标签样式
+  },
+  {
+    key: "3",
+    id: "3",
+    equipmentType: "toys",
+    productType: "奥特曼,皮卡丘", //TODO 变为标签样式
+  },
+];

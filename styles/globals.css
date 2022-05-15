@@ -14,3 +14,8 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.graphBar{
+	display: flex;
+	justify-content: space-around;
+}

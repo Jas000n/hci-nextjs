@@ -12,20 +12,31 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 const { Content, Footer, Sider } = Layout;
 
-function getItem(label, key, icon, href, children) {
+function getItem(label, key, icon, href, userTypes, children) {
   return {
     key,
     icon,
     children,
     label,
+    userTypes,
     href,
   };
 }
 
 const items = [
-  getItem("home page", "1", <HomeOutlined />, "/workbench/home"),
-  getItem("Option 2", "2", <DesktopOutlined />, "/workbench/order"),
-  getItem("Files", "9", <FileOutlined />, "/workbench/equipment"),
+  getItem("Home page", "1", <HomeOutlined />, "/workbench/home", [
+    "factory manager",
+  ]),
+  getItem("Order management", "2", <DesktopOutlined />, "/workbench/order", [
+    "factory manager",
+  ]),
+  getItem(
+    "Equipment management",
+    "9",
+    <FileOutlined />,
+    "/workbench/equipment",
+    ["factory manager"]
+  ),
   // getItem(
   //   "Tests",
   //   "10",
@@ -33,9 +44,6 @@ const items = [
   //   "/workbench/equipment"
   // ),
 ];
-{
-  /* <Image src="/vercel.svg" alt="vercel" width="64" height="64" /> */
-}
 
 // const items = [
 //   getItem("Option 1", "1", <PieChartOutlined />),

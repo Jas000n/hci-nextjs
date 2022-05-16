@@ -5,6 +5,7 @@ import { Tabs, Table, Tag, Space, Progress, Divider, Input } from "antd";
 const { TabPane } = Tabs;
 const { Search } = Input;
 export default function Home() {
+  
   return (
     <div>
       <div>
@@ -112,12 +113,15 @@ const columns_bid = [
   {
     title: "更多操作",
     key: "action",
-    render: (text, record) => (
+    render: (text, record) => {
+      return<>
       <Space size="middle">
         <a>更多细节</a>
         <a>删除通知</a>
       </Space>
-    ),
+      </>
+      
+    },
   },
 ];
 

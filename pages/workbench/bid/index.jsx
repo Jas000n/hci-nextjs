@@ -50,9 +50,11 @@ export default function Home() {
       <Divider>数据中心</Divider>
       <span style={{ width: "240px" }}>
         <div>
-          <Progress type="circle" percent={30} width={80} />
-          <Progress type="circle" percent={70} width={80} status="exception" />
-          <Progress type="circle" percent={100} width={80} />
+          <Progress percent={30} />
+          <Progress percent={50} status="active" />
+          <Progress percent={70} status="exception" />
+          <Progress percent={100} />
+          <Progress percent={50} showInfo={false} />
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           订单进度
@@ -196,6 +198,7 @@ const data_Bid_in_progress = [
     Bid_time: "2022-5-1",
     product: "电脑",
     current_price: "120000¥",
+    key: 0,
   },
   {
     Bid_ID: 20190025,
@@ -203,6 +206,7 @@ const data_Bid_in_progress = [
     Bid_time: "2022-5-1",
     product: "电脑",
     current_price: "120000¥",
+    key: 1,
   },
   {
     Bid_ID: 20190025,
@@ -210,6 +214,7 @@ const data_Bid_in_progress = [
     Bid_time: "2022-5-1",
     product: "电脑",
     current_price: "120000¥",
+    key: 2,
   },
 ];
 const data_give_Bid = [
@@ -220,6 +225,7 @@ const data_give_Bid = [
     deliver_time: "2022-5-1",
     product: "电脑",
     current_price: "120000¥",
+    key: 0,
   },
   {
     Bid_ID: 20190025,
@@ -228,6 +234,7 @@ const data_give_Bid = [
     deliver_time: "2022-5-1",
     product: "电脑",
     current_price: "120000¥",
+    key: 1,
   },
   {
     Bid_ID: 20190025,
@@ -236,6 +243,7 @@ const data_give_Bid = [
     deliver_time: "2022-5-1",
     product: "电脑",
     current_price: "120000¥",
+    key: 2,
   },
   {
     Bid_ID: 20190025,
@@ -244,5 +252,6 @@ const data_give_Bid = [
     deliver_time: "2022-5-1",
     product: "电脑",
     current_price: "120000¥",
+    key: 3,
   },
 ];

@@ -8,6 +8,7 @@ import {
 } from "../../../database/demo/type";
 import { useLocalStorageState } from "ahooks";
 import { useState } from "react";
+import PopupFormButton from "../../../components/PopupForm";
 
 export default function Type() {
   const initialEquipmentTypesColumn = [
@@ -28,14 +29,12 @@ export default function Type() {
         console.log(text, record, index);
         return (
           <>
-            {/* <Button>修改</Button> */}
             <Button
               onClick={() => {
                 console.log("?");
                 setEquipmentTypesData((lines) =>
-                  lines.filter((cur, idx) => idx != index)
+                  lines.filter((_, idx) => idx != index)
                 );
-                // setEquipmentTypesData
               }}
             >
               删除
@@ -52,11 +51,38 @@ export default function Type() {
     initialEquipmentTypesData
   );
   console.log(equipmentTypesData, "data");
-
+  const handleAddEquipmentType = (valueFromForm) => {
+    console.log(valueFromForm, "拿到");
+    setEquipmentTypesData((values) => {
+      const newValue = {
+        ...valueFromForm,
+        key: (1 + values[values.length - 1].key).toString(),
+      };
+      return [...values, newValue];
+    });
+  };
+  const formItems = [
+    {
+      name: "id",
+      label: "Id",
+    },
+    {
+      name: "equipmentType",
+      label: "设备类型",
+    },
+    {
+      name: "productType",
+      label: "可生产产品类型",
+    },
+  ];
   return (
     <>
       <Bar>
-        <Button>添加设备类型</Button>
+        <PopupFormButton
+          name="添加设备类型"
+          onSubmitForm={handleAddEquipmentType}
+          formItems={formItems}
+        />
         <Button
           onClick={() => {
             setEquipmentTypesData(initialEquipmentTypesData);

@@ -127,17 +127,20 @@ const data = [
     Bid_state: "拒绝",
     Bid_time: "2022-5-1",
     product: "电脑",
+    key:0,
   },
   {
     Bid_ID: 20190025,
     Bid_state: "通过",
     Bid_time: "2022-5-1",
     product: "电脑",
+    key:1,
   },
   {
     Bid_ID: 20190025,
     Bid_state: "审核中",
     Bid_time: "2022-5-1",
     product: "电脑",
+    key:2,
   },
 ];

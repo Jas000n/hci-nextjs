@@ -14,3 +14,10 @@ a {
 * {
   box-sizing: border-box;
 }
+.data_center{
+  display: flex;
+  justify-content: space-around;
+}
+.text_align_center{
+  text-align: center;
+}

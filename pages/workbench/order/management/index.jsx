@@ -1,26 +1,33 @@
+import { useLocalStorageState } from "ahooks";
 import { Tabs, Table, Tag, Space, Progress, Divider, Input } from "antd";
 import { useContext } from "react";
 import { CurrentUserContext } from "../../../../context/CurrentUserContext";
 import WorkbenchLayout from "../../../../layout/WorkbenchLayout";
 const { Search } = Input;
 export default function Order() {
-  const [user, setUser] = useContext(CurrentUserContext);
+  const [user, setUser] = useLocalStorageState('currentUser',{ userName: "test", password: "test", type: "test" });;
   console.log('user',user)
   if(user.type==="businessman"){
     console.log("hello businessman!")
   }
-  return (
-    <div>
-      <div>
-        <Search placeholder="搜索一切" style={{ width: 200 }} />
-      </div>
-      <Divider>工作台</Divider>
-      <Table dataSource={initialOrders} columns={columns} />
-      <Divider style={{ marginBottom: "40px" }}>数据中心</Divider>
-
-    </div>
+  switch(user.type){
+    case "businessman":
+      return (
+        <div>
+          <div>
+            <Search placeholder="搜索一切" style={{ width: 200 }} />
+          </div>
+          <Divider>工作台</Divider>
+          <Table dataSource={initialOrders} columns={columns} />
+          <Divider style={{ marginBottom: "40px" }}>数据中心</Divider>
     
-  );
+        </div>
+        
+      );
+      default:
+        return<div>default page</div>
+  }
+  
 }
 
 Order.getLayout = function getLayout(page) {

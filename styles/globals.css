@@ -14,8 +14,10 @@ a {
 * {
   box-sizing: border-box;
 }
-
-.graphBar{
-	display: flex;
-	justify-content: space-around;
+.data_center{
+  display: flex;
+  justify-content: space-around;
+}
+.text_align_center{
+  text-align: center;
 }

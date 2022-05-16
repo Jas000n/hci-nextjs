@@ -12,3 +12,8 @@ const CurrentUserProvider = (props) => {
 };
 
 export { CurrentUserContext, CurrentUserProvider };
+
+//经销商:老板/员工
+//厂家
+//工厂管理员
+//个体商户

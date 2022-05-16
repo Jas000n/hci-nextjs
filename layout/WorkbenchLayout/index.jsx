@@ -23,7 +23,7 @@ function getItem(label, key, icon, href, children) {
 
 const items = [
   getItem("用户主页", "1", <HomeOutlined />, "/workbench/home"),
-  getItem("订单管理", "2", <DesktopOutlined />, "/workbench/order"),
+  getItem("订单管理", "2", <DesktopOutlined />, "/workbench/order/management"),
   getItem("设备管理", "9", <FileOutlined />, "/workbench/equipment", [
     getItem("设备信息管理", "3", null, "/workbench/equipment/information"),
     getItem("设备类型管理", "4", null, "/workbench/equipment/type"),

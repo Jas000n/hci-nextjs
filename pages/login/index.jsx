@@ -35,6 +35,8 @@ export default function Login() {
           const { matchedAccount } = res.data;
           if (matchedAccount !== undefined) {
             message.success("登录成功");
+            console.log(matchedAccount);
+            setUser(matchedAccount);
             router.push("/workbench/home");
           } else {
             message.error("账号或密码错误,请重新输入");

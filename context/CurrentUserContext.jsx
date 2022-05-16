@@ -1,9 +1,17 @@
+import { useLocalStorageState } from "ahooks";
 import { useState, createContext } from "react";
 
 const CurrentUserContext = createContext();
 const CurrentUserProvider = (props) => {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useLocalStorageState("currentUser", {
+    defaultValue: {
+      userName: "test",
+      password: "test",
+      type: "factory_manager",
+    },
+  });
 
+  console.log(currentUser, "currentUser");
   return (
     <CurrentUserContext.Provider value={[currentUser, setCurrentUser]}>
       {props.children}

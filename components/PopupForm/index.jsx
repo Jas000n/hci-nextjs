@@ -37,7 +37,7 @@ const CollectionCreateForm = ({
         }}
       >
         {formItems.map((cur) => (
-          <Form.Item name={cur.name} label={cur.label} key={name}>
+          <Form.Item name={cur.name} label={cur.label} key={cur.name}>
             <Input />
           </Form.Item>
         ))}

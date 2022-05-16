@@ -9,6 +9,8 @@ import {
 import { useLocalStorageState } from "ahooks";
 import { useState } from "react";
 import PopupFormButton from "../../../components/PopupForm";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../../context/CurrentUserContext";
 
 export default function Type() {
   const initialEquipmentTypesColumn = [
@@ -75,8 +77,16 @@ export default function Type() {
       label: "可生产产品类型",
     },
   ];
+  const a = useContext(CurrentUserContext);
   return (
     <>
+      <Button
+        onClick={() => {
+          console.log(a);
+        }}
+      >
+        user
+      </Button>
       <Bar>
         <PopupFormButton
           name="添加设备类型"

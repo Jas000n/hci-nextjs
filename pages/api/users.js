@@ -14,6 +14,9 @@ export default function handler(req, res) {
 }
 
 const users = [
-  { userName: "test", password: "test", type: "test" },
-  { userName: "factory manager", password: "go", type: "factory manager" },
+  { userName: "test", password: "test", type: "factory_manager" },
+  { userName: "厂家", password: "123456", type: "manufacturer" },
+  { userName: "boss", password: "123456", type: "agency_boss" },
+  { userName: "businessman", password: "123456", type: "businessman" },
+  { userName: "factory manager", password: "go", type: "factory_manager" },
 ];

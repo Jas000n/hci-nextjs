@@ -16,12 +16,14 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { message } from "antd";
 import axios from "axios";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
 export default function Login() {
-  const [users, setUsers] = useState({});
-  //useContext: useUser
+  const [user, setUser] = useContext(CurrentUserContext);
   const [inputUserName, setInputUserName] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const router = useRouter();
+  console.log("user", user);
   const handleOnKeyDown = (e) => {
     if (e.key === "Enter") {
       axios

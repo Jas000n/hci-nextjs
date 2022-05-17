@@ -5,6 +5,7 @@ import PopupFormButton from "../../../components/PopupForm";
 const { TabPane } = Tabs;
 const { Search } = Input;
 import { useState } from "react";
+import TableFilter from "../../../components/TableFilter";
 export default function Home() {
   function countPercent() {
     let re = 0;
@@ -109,6 +110,11 @@ export default function Home() {
   };
   return (
     <div>
+      <TableFilter
+        data={tableFilterDemoData}
+        columns={TableFilterDemoColumns}
+      />
+      <hr />
       <PopupFormButton
         name="添加工厂"
         onSubmitForm={handleAddCompany}
@@ -128,7 +134,6 @@ export default function Home() {
               percent={countPercent()}
               format={(percent) => `${percent} %生产中`}
             />
-            
           </div>
           <div className="text_align_center">公司概览</div>
         </div>
@@ -181,5 +186,55 @@ const Initdata_company = [
     company_employee: "233",
     company_state: "下班",
     key: 3,
+  },
+];
+
+const tableFilterDemoData = [
+  {
+    key: "1",
+    name: "John Brown",
+    age: 32,
+    address: "New York No. 1 Lake Park",
+  },
+  {
+    key: "2",
+    name: "Joe Black",
+    age: 42,
+    address: "London No. 1 Lake Park",
+  },
+  {
+    key: "3",
+    name: "Jim Green",
+    age: 32,
+    address: "Sidney No. 1 Lake Park",
+  },
+  {
+    key: "4",
+    name: "Jim Red",
+    age: 32,
+    address: "London No. 2 Lake Park",
+  },
+];
+
+const TableFilterDemoColumns = [
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
+    width: "30%",
+    ifSearch: true,
+  },
+  {
+    title: "Age",
+    dataIndex: "age",
+    key: "age",
+    width: "20%",
+  },
+  {
+    title: "Address",
+    dataIndex: "address",
+    key: "address",
+    sorter: (a, b) => a.address.length - b.address.length,
+    sortDirections: ["descend", "ascend"],
   },
 ];

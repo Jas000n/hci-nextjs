@@ -9,18 +9,13 @@ export default function Home() {
   function countPercent() {
     let re = 0;
     let all = data_company.length;
-    let i=0;
-    // console.log("!!!!!!!!!!!!");
-    for (i=0;i<data_company.length;i++) {
-        // console.log("i=",i);
-        // console.log(data_company[i].company_state);
-
+    let i = 0;
+    for (i = 0; i < data_company.length; i++) {
       if (data_company[i].company_state === "工作") {
         re += 1;
       }
     }
-    return (re/all*100).toFixed(1);
-   
+    return ((re / all) * 100).toFixed(1);
   }
   const Initcolumns_company = [
     {
@@ -39,7 +34,7 @@ export default function Home() {
       dataIndex: "company_state",
       key: "company_state",
       render: (text) => {
-        let color = "black";
+        let color = "yellow";
         if (text === "下班") {
           color = "red";
         }
@@ -63,12 +58,20 @@ export default function Home() {
       key: "action",
       dataIndex: "operation",
       render: (text, record, index) => {
-        return (
-          <Space size="middle">
-            <a>下单</a>
-            <a onClick={() => handleWorkOff(text, record, index)}>下班</a>
-          </Space>
-        );
+        if (record.company_state != "下班") {
+          return (
+            <Space size="middle">
+              <a>下单</a>
+              <a onClick={() => handleWorkOff(text, record, index)}>下班</a>
+            </Space>
+          );
+        } else {
+          return (
+            <Space size="middle">
+              <a onClick={() => handleWorkOn(text, record, index)}>上班</a>
+            </Space>
+          );
+        }
       },
     },
   ];
@@ -93,13 +96,19 @@ export default function Home() {
         return cur;
       });
     });
-    console.log("re", record);
+  };
+  const handleWorkOn = (text, record, index) => {
+    SetdataCompany((previousState) => {
+      return previousState.map((cur, idx) => {
+        if (idx === index) {
+          return { ...cur, company_state: "工作" };
+        }
+        return cur;
+      });
+    });
   };
   return (
     <div>
-      <div>
-        <Search placeholder="搜索一切" style={{ width: 200 }} />
-      </div>
       <PopupFormButton
         name="添加工厂"
         onSubmitForm={handleAddCompany}
@@ -117,9 +126,9 @@ export default function Home() {
             <Progress
               type="circle"
               percent={countPercent()}
-              format={(percent) => `${percent} 生产中`}
+              format={(percent) => `${percent} %生产中`}
             />
-            <Progress type="circle" percent={100} format={() => "Done"} />
+            
           </div>
           <div className="text_align_center">公司概览</div>
         </div>
@@ -151,20 +160,26 @@ const formItems = [
 const Initdata_company = [
   {
     company_id: "张三公司",
-    company_employee: "233",
+    company_employee: "120",
     company_state: "空闲",
     key: 0,
   },
   {
-    company_id: "张三公司",
+    company_id: "李四公司",
     company_employee: "233",
     company_state: "工作",
     key: 1,
   },
   {
-    company_id: "张三公司",
-    company_employee: "233",
+    company_id: "王五公司",
+    company_employee: "666",
     company_state: "工作",
     key: 2,
+  },
+  {
+    company_id: "赵六公司",
+    company_employee: "233",
+    company_state: "下班",
+    key: 3,
   },
 ];

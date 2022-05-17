@@ -1,18 +1,113 @@
 import styled from "styled-components";
 import WorkbenchLayout from "../../../layout/WorkbenchLayout";
 import { Tabs, Table, Tag, Space, Progress, Divider, Input } from "antd";
-
+import PopupFormButton from "../../../components/PopupForm";
 const { TabPane } = Tabs;
 const { Search } = Input;
+import { useState } from "react";
 export default function Home() {
+  function countPercent() {
+    let re = 0;
+    let all = data_company.length;
+    let i=0;
+    // console.log("!!!!!!!!!!!!");
+    for (i=0;i<data_company.length;i++) {
+        // console.log("i=",i);
+        // console.log(data_company[i].company_state);
+
+      if (data_company[i].company_state === "工作") {
+        re += 1;
+      }
+    }
+    return (re/all*100).toFixed(1);
+   
+  }
+  const Initcolumns_company = [
+    {
+      title: "公司名称",
+      dataIndex: "company_id",
+      key: "company_id",
+      // render: text => <a>{text}</a>,
+    },
+    {
+      title: "经销商员工数",
+      dataIndex: "company_employee",
+      key: "company_employee",
+    },
+    {
+      title: "公司状态",
+      dataIndex: "company_state",
+      key: "company_state",
+      render: (text) => {
+        let color = "black";
+        if (text === "下班") {
+          color = "red";
+        }
+        if (text === "空闲") {
+          color = "green";
+        }
+        if (text === "工作") {
+          color = "blue";
+        }
+        return (
+          <>
+            <Tag color={color} key={text}>
+              {text}
+            </Tag>
+          </>
+        );
+      },
+    },
+    {
+      title: "管理公司",
+      key: "action",
+      dataIndex: "operation",
+      render: (text, record, index) => {
+        return (
+          <Space size="middle">
+            <a>下单</a>
+            <a onClick={() => handleWorkOff(text, record, index)}>下班</a>
+          </Space>
+        );
+      },
+    },
+  ];
+  const [columns_company, SetcolumnsCompany] = useState(Initcolumns_company);
+  const [data_company, SetdataCompany] = useState(Initdata_company);
+  const handleAddCompany = (valueFromForm) => {
+    console.log(valueFromForm, "拿到");
+    SetdataCompany((values) => {
+      const newValue = {
+        ...valueFromForm,
+        key: (1 + values[values.length - 1].key).toString(),
+      };
+      return [...values, newValue];
+    });
+  };
+  const handleWorkOff = (text, record, index) => {
+    SetdataCompany((previousState) => {
+      return previousState.map((cur, idx) => {
+        if (idx === index) {
+          return { ...cur, company_state: "下班" };
+        }
+        return cur;
+      });
+    });
+    console.log("re", record);
+  };
   return (
     <div>
       <div>
         <Search placeholder="搜索一切" style={{ width: 200 }} />
       </div>
+      <PopupFormButton
+        name="添加工厂"
+        onSubmitForm={handleAddCompany}
+        formItems={formItems}
+      />
       <Divider>工作台</Divider>
 
-      <Table columns={columns_bid} dataSource={data} />
+      <Table columns={columns_company} dataSource={data_company} />
 
       <Divider style={{ marginBottom: "40px" }}>数据中心</Divider>
 
@@ -21,12 +116,12 @@ export default function Home() {
           <div style={{ marginBottom: "40px" }}>
             <Progress
               type="circle"
-              percent={75}
-              format={(percent) => `${percent} Days`}
+              percent={countPercent()}
+              format={(percent) => `${percent} 生产中`}
             />
             <Progress type="circle" percent={100} format={() => "Done"} />
           </div>
-          <div className="text_align_center">生产进度</div>
+          <div className="text_align_center">公司概览</div>
         </div>
       </div>
     </div>
@@ -38,55 +133,22 @@ Home.getLayout = function getLayout(page) {
 function callback(key) {
   console.log(key);
 }
-const columns_bid = [
+
+const formItems = [
   {
-    title: "公司名称",
-    dataIndex: "company_id",
-    key: "company_id",
-    // render: text => <a>{text}</a>,
+    name: "company_id",
+    label: "公司名称",
   },
   {
-    title: "经销商员工数",
-    dataIndex: "company_employee",
-    key: "company_employee",
+    name: "company_employee",
+    label: "公司员工数",
   },
   {
-    title: "公司状态",
-    dataIndex: "company_state",
-    key: "company_state",
-    render: (text) => {
-      let color = "black";
-      if (text === "下班") {
-        color = "red";
-      }
-      if (text === "空闲") {
-        color = "green";
-      }
-      if (text === "工作") {
-        color = "blue";
-      }
-      return (
-        <>
-          <Tag color={color} key={text}>
-            {text}
-          </Tag>
-        </>
-      );
-    },
-  },
-  {
-    title: "管理公司",
-    key: "action",
-    render: (text, record) => (
-      <Space size="middle">
-        <a>下单</a>
-        <a>下班</a>
-      </Space>
-    ),
+    name: "company_state",
+    label: "公司状态",
   },
 ];
-
-const data = [
+const Initdata_company = [
   {
     company_id: "张三公司",
     company_employee: "233",

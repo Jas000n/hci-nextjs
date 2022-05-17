@@ -23,12 +23,13 @@ export default function Home() {
       title: "公司名称",
       dataIndex: "company_id",
       key: "company_id",
-      // render: text => <a>{text}</a>,
+      ifSearch: true,
     },
     {
       title: "经销商员工数",
       dataIndex: "company_employee",
       key: "company_employee",
+      ifSearch: true,
     },
     {
       title: "公司状态",
@@ -110,20 +111,16 @@ export default function Home() {
   };
   return (
     <div>
-      <TableFilter
-        data={tableFilterDemoData}
-        columns={TableFilterDemoColumns}
-      />
-      <hr />
       <PopupFormButton
         name="添加工厂"
         onSubmitForm={handleAddCompany}
         formItems={formItems}
       />
       <Divider>工作台</Divider>
-
-      <Table columns={columns_company} dataSource={data_company} />
-
+      <TableFilter
+        data={data_company}
+        columns={columns_company}
+      />
       <Divider style={{ marginBottom: "40px" }}>数据中心</Divider>
 
       <div className="data_center">
@@ -132,7 +129,7 @@ export default function Home() {
             <Progress
               type="circle"
               percent={countPercent()}
-              format={(percent) => `${percent} %生产中`}
+              format={(percent) => `${percent} 工作中`}
             />
           </div>
           <div className="text_align_center">公司概览</div>
@@ -189,52 +186,5 @@ const Initdata_company = [
   },
 ];
 
-const tableFilterDemoData = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-  },
-];
 
-const TableFilterDemoColumns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    width: "30%",
-    ifSearch: true,
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
-    width: "20%",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-    sorter: (a, b) => a.address.length - b.address.length,
-    sortDirections: ["descend", "ascend"],
-  },
-];
+

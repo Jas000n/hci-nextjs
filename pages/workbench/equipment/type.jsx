@@ -10,7 +10,6 @@ import { useLocalStorageState } from "ahooks";
 import { useState } from "react";
 import PopupFormButton from "../../../components/PopupForm";
 import { useContext } from "react";
-import { CurrentUserContext } from "../../../context/CurrentUserContext";
 
 export default function Type() {
   const initialEquipmentTypesColumn = [
@@ -28,12 +27,10 @@ export default function Type() {
       dataIndex: "operation",
       width: "15%",
       render: (text, record, index) => {
-        console.log(text, record, index);
         return (
           <>
             <Button
               onClick={() => {
-                console.log("?");
                 setEquipmentTypesData((lines) =>
                   lines.filter((_, idx) => idx != index)
                 );
@@ -52,9 +49,7 @@ export default function Type() {
   const [equipmentTypesData, setEquipmentTypesData] = useState(
     initialEquipmentTypesData
   );
-  console.log(equipmentTypesData, "data");
   const handleAddEquipmentType = (valueFromForm) => {
-    console.log(valueFromForm, "拿到");
     setEquipmentTypesData((values) => {
       const newValue = {
         ...valueFromForm,
@@ -77,16 +72,15 @@ export default function Type() {
       label: "可生产产品类型",
     },
   ];
-  const a = useContext(CurrentUserContext);
   return (
     <>
-      <Button
+      {/* <Button
         onClick={() => {
           console.log(a);
         }}
       >
         user
-      </Button>
+      </Button> */}
       <Bar>
         <PopupFormButton
           name="添加设备类型"

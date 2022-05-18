@@ -3,7 +3,6 @@ import Link from "next/link";
 import { memo } from "react";
 import { useState } from "react";
 const TestLayout = ({ children }) => {
-  console.log("render layout");
   const [count, setCount] = useState(0);
   return (
     <div>

@@ -13,9 +13,10 @@ import { ConfigProvider } from "antd";
 import { Button } from "antd";
 import { useEffect } from "react";
 import { useContext } from "react";
-import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { useMemo } from "react";
 import { useLocalStorageState } from "ahooks";
+import axios from "axios";
+import getLoginUser from "../../helper/getLoginUser";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -43,16 +44,28 @@ export default function WorkbenchLayout({ children }) {
     ConfigProvider.config({
       theme: {
         primaryColor: "#25b864",
+        infoColor: "",
+        successColor: "",
+        processingColor: "",
+        errorColor: "",
+        warningColor: "",
       },
     });
   };
-  // const [user, setUser] = useContext(CurrentUserContext);
-  const [user, setUser] = useLocalStorageState("currentUser", {
-    defaultValue: {
-      userName: "test",
-      password: "test",
-      type: "factory_manager",
-    },
+  useEffect(() => {
+    getLoginUser().then((res) => {
+      setUser(res);
+    });
+    // axios.get("/api/auth/loginuser").then((res) => {
+    //   console.log(res.data);
+    //   setUser(res.data);
+    // });
+  }, []);
+
+  const [user, setUser] = useState({
+    userName: "test",
+    password: "test",
+    type: "factory_manager",
   });
   const items = useMemo(() => getLayoutItems(user.type), [user.type]);
   return (
@@ -88,7 +101,7 @@ export default function WorkbenchLayout({ children }) {
               </Breadcrumb.Item>
             ))}
           </Breadcrumb>
-          {/* <Button onClick={handleChangeColor}>color</Button> */}
+          <Button onClick={handleChangeColor}>color</Button>
           <div
             className="site-layout-background"
             style={{

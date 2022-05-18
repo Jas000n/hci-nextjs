@@ -1,16 +1,20 @@
 import { useLocalStorageState } from "ahooks";
 import { Tabs, Table, Tag, Space, Progress, Divider, Input } from "antd";
+import { useState } from "react";
 import { useContext } from "react";
-import { CurrentUserContext } from "../../../../context/CurrentUserContext";
 import WorkbenchLayout from "../../../../layout/WorkbenchLayout";
 const { Search } = Input;
 export default function Order() {
-  const [user, setUser] = useLocalStorageState('currentUser',{ userName: "test", password: "test", type: "test" });;
-  console.log('user',user)
-  if(user.type==="businessman"){
-    console.log("hello businessman!")
+  const [user, setUser] = useState({
+    userName: "test",
+    password: "test",
+    type: "test",
+  });
+  console.log("user", user);
+  if (user.type === "businessman") {
+    console.log("hello businessman!");
   }
-  switch(user.type){
+  switch (user.type) {
     case "businessman":
       return (
         <div>
@@ -19,15 +23,12 @@ export default function Order() {
           </div>
           <Divider>工作台</Divider>
           <Table dataSource={initialOrders} columns={columns} />
-          <Divider style={{ marginBottom: "40px" }}>数据中心</Divider>
-    
+          {/* <Divider style={{ marginBottom: "40px" }}>数据中心</Divider> */}
         </div>
-        
       );
-      default:
-        return<div>default page</div>
+    default:
+      return <div>default page</div>;
   }
-  
 }
 
 Order.getLayout = function getLayout(page) {
@@ -40,32 +41,32 @@ const initialOrders = [
     order_id: "1",
     order_state: "等待投标",
     order_progress: "50",
-    order_detail:"查看投标",
-    order_content:"电脑",
+    order_detail: "查看投标",
+    order_content: "电脑",
   },
   {
     key: "2",
     order_id: "1",
     order_state: "等待投标",
     order_progress: "20",
-    order_detail:"查看投标",
-    order_content:"手机",
+    order_detail: "查看投标",
+    order_content: "手机",
   },
   {
     key: "3",
     order_id: "1",
     order_state: "等待投标",
     order_progress: "30",
-    order_detail:"查看投标",
-    order_content:"平板",
+    order_detail: "查看投标",
+    order_content: "平板",
   },
   {
     key: "4",
     order_id: "1",
     order_state: "等待投标",
     order_progress: "80",
-    order_detail:"查看投标",
-    order_content:"鼠标",
+    order_detail: "查看投标",
+    order_content: "鼠标",
   },
 ];
 
@@ -90,25 +91,25 @@ const columns = [
     dataIndex: "order_progress",
     key: "order_progress",
     render: (text, record) => {
-      return<>
-      <Progress percent={text} size="small" status="active" />
-      </>
-      
+      return (
+        <>
+          <Progress percent={text} size="small" status="active" />
+        </>
+      );
     },
-    
   },
   {
     title: "详情",
     dataIndex: "order_detail",
     key: "order_detail",
     render: (text, record) => {
-      return<>
-      <Space size="middle">
-        <a>{text}</a>
-
-      </Space>
-      </>
-      
+      return (
+        <>
+          <Space size="middle">
+            <a>{text}</a>
+          </Space>
+        </>
+      );
     },
   },
 ];

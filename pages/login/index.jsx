@@ -17,26 +17,22 @@ import { useRouter } from "next/router";
 import { message } from "antd";
 import axios from "axios";
 import { useContext } from "react";
-import { CurrentUserContext } from "../../context/CurrentUserContext";
 export default function Login() {
-  const [user, setUser] = useContext(CurrentUserContext);
   const [inputUserName, setInputUserName] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const router = useRouter();
-  console.log("user", user);
   const handleOnKeyDown = (e) => {
     if (e.key === "Enter") {
       axios
-        .post("/api/users", {
+        .post("/api/auth/loginuser", {
           userName: inputUserName,
           password: inputPassword,
         })
         .then((res) => {
-          const { matchedAccount } = res.data;
-          if (matchedAccount !== undefined) {
-            message.success("登录成功");
-            console.log(matchedAccount);
-            setUser(matchedAccount);
+          console.log(res, "res");
+          const { data } = res;
+          if (data) {
+            message.success("登录成功,欢迎" + data.userName);
             router.push("/workbench/home");
           } else {
             message.error("账号或密码错误,请重新输入");
@@ -82,6 +78,7 @@ export default function Login() {
           />
         </Space>
       </Center>
+      {/* <Button onClick={}>+</Button> */}
     </div>
   );
 }

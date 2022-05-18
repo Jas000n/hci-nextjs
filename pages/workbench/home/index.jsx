@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import WorkbenchLayout from "../../../layout/WorkbenchLayout";
 import { Tabs, Table, Tag, Space, Progress, Divider, Input } from "antd";
+import getLoginUser from "../../../helper/getLoginUser";
+import axios from "axios";
 
 const { TabPane } = Tabs;
 const { Search } = Input;
-export default function Home() {
-  
+export default function Home({ data }) {
+  // const loginUser = await getLoginUser();
+  console.log("⭐", data);
   return (
     <div>
       <div>
@@ -14,7 +17,7 @@ export default function Home() {
       <Divider>通知中心</Divider>
       <Tabs onChange={callback} type="card">
         <TabPane tab="竞标" key="1">
-          <Table columns={columns_bid} dataSource={data} />
+          <Table columns={columns_bid} dataSource={tableData} />
         </TabPane>
         <TabPane tab="订单" key="2"></TabPane>
         <TabPane tab="工厂" key="3"></TabPane>
@@ -114,37 +117,44 @@ const columns_bid = [
     title: "更多操作",
     key: "action",
     render: (text, record) => {
-      return<>
-      <Space size="middle">
-        <a>更多细节</a>
-        <a>删除通知</a>
-      </Space>
-      </>
-      
+      return (
+        <>
+          <Space size="middle">
+            <a>更多细节</a>
+            <a>删除通知</a>
+          </Space>
+        </>
+      );
     },
   },
 ];
 
-const data = [
+const tableData = [
   {
     Bid_ID: 20190025,
     Bid_state: "拒绝",
     Bid_time: "2022-5-1",
     product: "电脑",
-    key:0,
+    key: 0,
   },
   {
     Bid_ID: 20190025,
     Bid_state: "通过",
     Bid_time: "2022-5-1",
     product: "电脑",
-    key:1,
+    key: 1,
   },
   {
     Bid_ID: 20190025,
     Bid_state: "审核中",
     Bid_time: "2022-5-1",
     product: "电脑",
-    key:2,
+    key: 2,
   },
 ];
+export async function getServerSideProps(context) {
+  const loginUser = await getLoginUser();
+  return {
+    props: { data: { loginUser } },
+  };
+}

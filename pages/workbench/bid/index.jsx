@@ -175,7 +175,6 @@ const columns_Bid_in_progress = [
     title: "更多操作",
     key: "action",
     render: (text, record) => {
-      console.log(record);
       let buttoninfo = "重新投标";
       if (record.Bid_state === "通过") {
         buttoninfo = "排产";

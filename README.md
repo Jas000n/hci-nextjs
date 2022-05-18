@@ -40,3 +40,11 @@
     - order/management
   - 竞标管理
     - bid
+
+
+接口设计
+auth/loginUser
+- get:获取loginUser
+- post:
+  - 设置loginUser
+  - type:add(添加users到数据库)

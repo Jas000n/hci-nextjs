@@ -16,7 +16,7 @@ export default function handler(req, res) {
     axios
       .post("http://127.0.0.1:8081", req.body)
       .then((backend) => {
-        console.log(backend.data, "看看express返回的");
+        console.log(backend.data, "看看express返回的,e");
         res.status(200).json(backend.data);
       })
       .catch((err) => {

@@ -39,19 +39,6 @@ export default function WorkbenchLayout({ children }) {
     setBreadcrumb(newBreadcrumb);
   };
   const [breadcrumb, setBreadcrumb] = useState(["home"]);
-  // const [theme, setTheme] = useState({
-  //   primaryColor: "#25b864",
-  //   infoColor: "",
-  //   successColor: "",
-  //   processingColor: "",
-  //   errorColor: "",
-  //   warningColor: "",
-  // });
-  // useEffect(() => {
-  //   ConfigProvider.config({
-  //     theme: theme,
-  //   });
-  // }, [theme]);
   useEffect(() => {
     getLoginUser().then((res) => {
       setUser(res);
@@ -70,35 +57,6 @@ export default function WorkbenchLayout({ children }) {
       ? setPrefix("custom-dark")
       : setPrefix("custom-default");
   };
-  // const handleSwitchTheme = () => {
-  //   console.log("wow");
-  //   setPrefix("custom-dark");
-  //   ConfigProvider.config({
-  //     // prefixCls: "custom-dark",
-  //     prefixCls: "custom-default",
-  //     theme: {
-  //       primaryColor: "#25b864",
-  //     },
-  //   });
-  //   // setPrefix((prefix) => {
-  //   //   if (prefix === "custom-default") {
-  //   //     return "custom-dark";
-  //   //   } else {
-  //   //     return "custom-default";
-  //   //   }
-  //   // });
-  // };
-  // useEffect(() => {
-  //   ConfigProvider.config({
-  //     prefixCls: prefix,
-  //   });
-  // }, [prefix]);
-  // const [prefix, setPrefix] = useState("custom-default");
-  // const handleSwitchTheme = () => {
-  //   prefix === "custom-default"
-  //     ? setPrefix("custom-dark")
-  //     : setPrefix("custom-default");
-  // };
   return (
     <ConfigProvider prefixCls={prefix}>
       <div className={prefix}>
@@ -139,18 +97,6 @@ export default function WorkbenchLayout({ children }) {
                   {prefix === "custom-default" ? "切换暗黑" : "切换明亮"}
                 </Button>
               </div>
-              {/* <input
-                type="color"
-                value={theme.primaryColor}
-                name="primary"
-                onChange={(e) => {
-                  setTheme((cur) => {
-                    const newCur = { ...cur, primaryColor: e.target.value };
-                    console.log(newCur);
-                    return newCur;
-                  });
-                }}
-              /> */}
               <div
                 className="site-layout-background"
                 style={{

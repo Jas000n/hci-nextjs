@@ -2,7 +2,6 @@ import styled from "styled-components";
 import WorkbenchLayout from "../../../layout/WorkbenchLayout";
 import { Tabs, Table, Tag, Space, Progress, Divider, Input } from "antd";
 import getLoginUser from "../../../helper/getLoginUser";
-import axios from "axios";
 
 const { TabPane } = Tabs;
 const { Search } = Input;

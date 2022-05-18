@@ -21,3 +21,9 @@ a {
 .text_align_center{
   text-align: center;
 }
+
+.header-bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}

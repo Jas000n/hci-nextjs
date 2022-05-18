@@ -1,7 +1,5 @@
 // pages/api/login.ts
 
-import { withIronSessionApiRoute } from "iron-session/next";
-
 export default withIronSessionApiRoute();
 //   async function loginRoute(req, res) {
 //     // get user from database then:

@@ -17,7 +17,7 @@ export default function TableFilter({ data, columns }) {
       <div style={{ padding: 8 }}>
         <Input
           ref={inputRef}
-          placeholder={`Search ${dataIndex}`}
+          placeholder={"请输入："}
           value={selectedKeys[0]}
           onChange={(e) =>
             setSelectedKeys(e.target.value ? [e.target.value] : [])
@@ -33,16 +33,16 @@ export default function TableFilter({ data, columns }) {
             size="small"
             style={{ width: 90 }}
           >
-            Search
+            搜索
           </Button>
           <Button
             onClick={() => handleReset(clearFilters)}
             size="small"
             style={{ width: 90 }}
           >
-            Reset
+            重置
           </Button>
-          <Button
+          {/* <Button
             type="link"
             size="small"
             onClick={() => {
@@ -51,8 +51,8 @@ export default function TableFilter({ data, columns }) {
               setSearchedColumn(dataIndex);
             }}
           >
-            Filter
-          </Button>
+            过滤
+          </Button> */}
         </Space>
       </div>
     ),

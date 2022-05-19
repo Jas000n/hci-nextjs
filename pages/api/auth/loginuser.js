@@ -20,6 +20,7 @@ export default function handler(req, res) {
         res.status(200).json(backend.data);
       })
       .catch((err) => {
+        res.status(500).json({ error: "后端出现问题" });
         console.error("后端出现问题");
       });
   }

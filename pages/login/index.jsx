@@ -39,8 +39,15 @@ export default function Login() {
         }
       })
       .catch(function (error) {
-        console.log(error);
-        message.error("服务器出现问题,请查看控制台");
+        if (error.response.data?.type === "test") {
+          message.success(
+            "测试账户" + error.response.data.userName + "登录成功"
+          );
+          router.push("/workbench/home");
+        } else {
+          console.log(error);
+          message.error("服务器出现问题,请查看控制台");
+        }
       });
   };
   const handleOnKeyDown = (e) => {

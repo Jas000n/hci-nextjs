@@ -132,6 +132,36 @@ export default function Home({ data }) {
       );
     case "agency_boss":
       return <div>hello,jxslb</div>;
+    case "test":
+      return (
+        <div>
+          <Divider>通知中心</Divider>
+          <Tabs onChange={callback} type="card">
+            <TabPane tab="竞标" key="1">
+              <TableFilter data={data_info} columns={columns_info} />
+            </TabPane>
+            <TabPane tab="订单" key="2"></TabPane>
+            <TabPane tab="工厂" key="3"></TabPane>
+            <TabPane tab="产品" key="4"></TabPane>
+          </Tabs>
+          <Divider style={{ marginBottom: "40px" }}>数据中心</Divider>
+
+          <div className="data_center">
+            <Row gutter={16}>
+              <Col span={20}>
+                <Statistic title="新通知条数" value={data_info.length} />
+                <Button
+                  style={{ marginTop: 16 }}
+                  type="primary"
+                  onClick={DeleteAllInfo}
+                >
+                  清空所有通知
+                </Button>
+              </Col>
+            </Row>
+          </div>
+        </div>
+      );
   }
 }
 

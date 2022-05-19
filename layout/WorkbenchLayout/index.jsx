@@ -58,7 +58,7 @@ export default function WorkbenchLayout({ children }) {
   const [user, setUser] = useState({
     userName: "test",
     password: "test",
-    type: "factory_manager",
+    type: "test",
   });
   const items = useMemo(() => getLayoutItems(user.type), [user.type]);
   const [prefix, setPrefix] = useState("custom-default");

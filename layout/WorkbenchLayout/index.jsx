@@ -112,7 +112,7 @@ export default function WorkbenchLayout({ children }) {
                 textAlign: "center",
               }}
             >
-              Ant Design ©2018 Created by Ant UED
+              {/*  */}
             </Footer>
           </Layout>
         </Layout>
@@ -133,7 +133,7 @@ const getLayoutItems = (type) => {
           <HomeOutlined />,
           "/workbench/order/management"
         ),
-        getItem("竞标管理", "4", <HomeOutlined />, "/workbench/bid"),
+        getItem("投标管理", "4", <HomeOutlined />, "/workbench/bid"),
       ];
     case "agency_employee":
       return [
@@ -144,7 +144,7 @@ const getLayoutItems = (type) => {
           <HomeOutlined />,
           "/workbench/order/management"
         ),
-        getItem("竞标管理", "3", <HomeOutlined />, "/workbench/bid"),
+        getItem("投标管理", "3", <HomeOutlined />, "/workbench/bid"),
       ];
     case "businessman":
       return [
@@ -155,7 +155,7 @@ const getLayoutItems = (type) => {
           <HomeOutlined />,
           "/workbench/order/management"
         ),
-        getItem("竞标管理", "3", <HomeOutlined />, "/workbench/bid"),
+        getItem("投标管理", "3", <HomeOutlined />, "/workbench/bid"),
       ];
     case "manufacturer":
       return [
@@ -197,15 +197,18 @@ const getLayoutItems = (type) => {
           <DesktopOutlined />,
           "/workbench/order/management"
         ),
-        getItem("设备管理", "9", <FileOutlined />, "/workbench/equipment", [
+        getItem("设备管理", "3", <FileOutlined />, "/workbench/equipment", [
           getItem(
             "设备信息管理",
-            "3",
+            "4",
             null,
             "/workbench/equipment/information"
           ),
-          getItem("设备类型管理", "4", null, "/workbench/equipment/type"),
+          getItem("设备类型管理", "5", null, "/workbench/equipment/type"),
         ]),
+        getItem("投标管理", "6", <HomeOutlined />, "/workbench/bid"),
+        // getItem("订单交付", "8", <HomeOutlined />, "/workbench/order/delivery"),
+        getItem("企业管理", "9", <HomeOutlined />, "/workbench/company"),
       ];
   }
 };

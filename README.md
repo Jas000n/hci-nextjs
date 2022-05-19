@@ -48,3 +48,6 @@ auth/loginUser
 - post:
   - 设置loginUser
   - type:add(添加users到数据库)
+
+
+bug:main分支目前在开启后端的时候进行请求会读取currentUser而出现错误

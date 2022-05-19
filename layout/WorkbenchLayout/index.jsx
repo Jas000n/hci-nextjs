@@ -44,6 +44,16 @@ export default function WorkbenchLayout({ children }) {
       setUser(res);
     });
   }, []);
+  useEffect(() => {
+    router.events.on("routeChangeComplete", () => {
+      console.log("route change routeChangeComplete", "!");
+    });
+    return () => {
+      router.events.off("routeChangeComplete", () => {
+        console.log("stoped");
+      });
+    };
+  }, [router.events]);
 
   const [user, setUser] = useState({
     userName: "test",

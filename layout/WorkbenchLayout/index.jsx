@@ -207,12 +207,6 @@ const getLayoutItems = (type) => {
           getItem("设备类型管理", "5", null, "/workbench/equipment/type"),
         ]),
         getItem("投标管理", "6", <HomeOutlined />, "/workbench/bid"),
-        getItem(
-          "订单管理",
-          "7",
-          <HomeOutlined />,
-          "/workbench/order/management"
-        ),
         // getItem("订单交付", "8", <HomeOutlined />, "/workbench/order/delivery"),
         getItem("企业管理", "9", <HomeOutlined />, "/workbench/company"),
       ];
